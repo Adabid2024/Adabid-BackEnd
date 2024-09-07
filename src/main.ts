@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { CustomLogger } from './utilities/logger/logger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 
 async function bootstrap() {
   try {
@@ -13,6 +14,12 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe());
     app.enableCors();
     app.use(compression());
+    app.use(bodyParser.json({ limit: '500mb' }));
+    app.use(bodyParser.urlencoded({
+      limit: '500mb',
+      extended: true,
+      parameterLimit: 50000,
+    })),
 
     await app.listen(process.env.PORT || 3000);
   } catch (error) {
