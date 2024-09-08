@@ -4,7 +4,7 @@ import { CustomLogger } from './utilities/logger/logger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import compression from 'compression';
 import bodyParser from 'body-parser';
-
+// 
 async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule, {
